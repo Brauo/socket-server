@@ -19,8 +19,12 @@ io.on("connection", (socket) => {
     console.log(`User Connected: ${socket.id}`);
 
     socket.on("join_room", (data) => {
-        socket.join(data);
-        console.log(data)
+        if(io.sockets.clients('room').length < 2){
+            socket.join(data);
+        }else{
+            console.log("Maxed")
+        }
+        
         console.log(`User with ID: ${socket.id} joined room: ${data}`)
     });
 
