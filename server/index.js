@@ -15,11 +15,19 @@ const io = new Server(server, {
     },
 });
 
+var numClients = {};
+
 io.on("connection", (socket) => {
     console.log(`User Connected: ${socket.id}`);
 
     socket.on("join_room", (data) => {
-        socket.join(data);
+        socket.room = data;
+        if(numClients[room] < 2){
+            socket.join(data);
+        }else{
+            console.log("Maxed Room!")
+        }
+        
         console.log(`User with ID: ${socket.id} joined room: ${data}`)
     });
 
