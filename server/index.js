@@ -22,10 +22,10 @@ io.on("connection", (socket) => {
 
     socket.on("join_room", (data) => {
         socket.room = data;
-        if(numClients[room] < 2){
+        if(numClients[data] < 2){
             socket.join(data);
         }else{
-            console.log("Maxed Room!")
+            console.log("MAxed")
         }
         
         console.log(`User with ID: ${socket.id} joined room: ${data}`)
